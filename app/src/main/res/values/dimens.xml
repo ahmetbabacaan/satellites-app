@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="textDefaultSize">18sp</dimen>
+    <dimen name="textDefaultMargin">24dp</dimen>
+    <dimen name="textLargeMargin">48dp</dimen>
+    <dimen name="textSmallMargin">16dp</dimen>
+    <dimen name="textDefaultPadding">16dp</dimen>
+    <dimen name="textSmallPadding">6dp</dimen>
+    <dimen name="elevationDefault">16dp</dimen>
+    <dimen name="cardSmallRadius">8dp</dimen>
+    <dimen name="cardDefaultRadius">14dp</dimen>
+    <dimen name="errorPlaceHolderSize">150dp</dimen>
+    <dimen name="cardDefaultElevation">4dp</dimen>
+    <dimen name="textSmallSize">14sp</dimen>
+    <dimen name="textLargeSize">24sp</dimen>
+</resources>
