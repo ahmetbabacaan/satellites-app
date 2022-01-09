@@ -1,10 +1,15 @@
 package com.ahmetbabacan.satellites.di
 
 import android.content.Context
-import com.ahmetbabacan.satellites.network.SatelliteService
-import com.ahmetbabacan.satellites.util.Constants.baseUrl
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.ahmetbabacan.satellites.network.MockRequestInterceptor
+import com.ahmetbabacan.satellites.network.MoshiConverter
+import com.ahmetbabacan.satellites.network.SatelliteService
+import com.ahmetbabacan.satellites.util.Constants.baseUrl
+import com.ahmetbabacan.satellites.util.dataStore
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -28,6 +33,7 @@ object NetworkModule {
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(chuckerInterceptor)
+            .addInterceptor(MockRequestInterceptor(context))
             .build()
     }
 
@@ -47,6 +53,14 @@ object NetworkModule {
         return retrofit.create(SatelliteService::class.java)
     }
 
+    @Provides
+    @Singleton
+    fun provideMoshi(): Moshi {
+        return Moshi.Builder()
+            .add(MoshiConverter())
+            .build()
+    }
+
     @Singleton
     @Provides
     fun provideChuckInterceptor(@ApplicationContext context: Context) =
@@ -56,4 +70,9 @@ object NetworkModule {
             .redactHeaders(emptySet())
             .alwaysReadResponseBody(false)
             .build()
+
+    @Singleton
+    @Provides
+    fun provideDataStore(@ApplicationContext context: Context): DataStore<Preferences> =
+        context.dataStore
 }

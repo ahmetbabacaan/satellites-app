@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import
+            alias="R"
+            type="com.ahmetbabacan.satellites.R" />
+
+        <variable
+            name="satellite"
+            type="com.ahmetbabacan.satellites.data.models.Satellite" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/itemSatellite_clRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/textSmallPadding"
+        android:foreground="?attr/selectableItemBackground"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/itemSatellite_ivStatus"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:adjustViewBounds="true"
+            android:layout_marginStart="100dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/itemSatellite_tvTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/green_circle" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/itemSatellite_tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/cardview_default_elevation"
+            android:gravity="left"
+            android:layout_marginLeft="16dp"
+            android:paddingTop="@dimen/textSmallPadding"
+            android:paddingLeft="@dimen/textSmallPadding"
+            android:paddingRight="@dimen/textSmallPadding"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSmallSize"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/itemSatellite_tvStatus"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/itemSatellite_ivStatus"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Starship-1" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/itemSatellite_tvStatus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/cardview_default_elevation"
+            android:gravity="left"
+            android:paddingBottom="@dimen/textSmallPadding"
+            android:paddingLeft="@dimen/textSmallPadding"
+            android:paddingRight="@dimen/textSmallPadding"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSmallSize"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/itemSatellite_tvTitle"
+            app:layout_constraintStart_toStartOf="@id/itemSatellite_tvTitle"
+            app:layout_constraintTop_toBottomOf="@+id/itemSatellite_tvTitle"
+            tools:text="Active" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
