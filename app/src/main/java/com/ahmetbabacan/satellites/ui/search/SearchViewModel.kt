@@ -25,6 +25,8 @@ class SearchViewModel @Inject constructor(private val searchRepository: SearchRe
     val queryData: MutableStateFlow<String?> =
         MutableStateFlow(null)
 
+    private var lastQuery: String? = null
+
     @get:Bindable
     var isLoading: Boolean by bindingProperty(false)
         private set
@@ -74,10 +76,22 @@ class SearchViewModel @Inject constructor(private val searchRepository: SearchRe
     fun onSearchKeywordChanged(query: String?) {
         query?.let {
             isError = false
-            if (it.isBlank()) {
-                queryData.value = null
-            } else {
-                queryData.value = query
+            if(lastQuery!=null){
+                if(it.length > 2){
+                    queryData.value = it
+                }else{
+                    queryData.value = null
+                    lastQuery = null
+                }
+            }else {
+                if (it.isBlank()) {
+                    queryData.value = null
+                } else {
+                    if(it.length > 2) {
+                        queryData.value = it
+                        lastQuery = it
+                    }
+                }
             }
         }
 
