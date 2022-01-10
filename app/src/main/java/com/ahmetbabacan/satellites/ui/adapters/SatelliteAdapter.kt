@@ -2,10 +2,13 @@ package com.ahmetbabacan.satellites.ui.adapters
 
 import android.graphics.Color
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.NO_POSITION
 import com.ahmetbabacan.satellites.R
 import com.ahmetbabacan.satellites.data.models.Satellite
 import com.ahmetbabacan.satellites.databinding.ItemSatelliteBinding
+import com.ahmetbabacan.satellites.ui.search.SearchFragmentDirections
 import com.skydoves.bindables.binding
 
 class SatelliteAdapter : RecyclerView.Adapter<SatelliteAdapter.SatelliteViewHolder>() {
@@ -14,7 +17,15 @@ class SatelliteAdapter : RecyclerView.Adapter<SatelliteAdapter.SatelliteViewHold
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SatelliteViewHolder {
         val binding = parent.binding<ItemSatelliteBinding>(R.layout.item_satellite)
-        return SatelliteViewHolder(binding)
+        return SatelliteViewHolder(binding).apply {
+            binding.root.setOnClickListener {
+                val position = bindingAdapterPosition.takeIf { pos -> pos != NO_POSITION }
+                    ?: return@setOnClickListener
+                it.findNavController().navigate(
+                    SearchFragmentDirections.actionSearchFragmentToDetailFragment(items[position])
+                )
+            }
+        }
     }
 
     fun setSatelliteList(satelliteList: List<Satellite>) {

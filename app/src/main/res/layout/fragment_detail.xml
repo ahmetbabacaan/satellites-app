@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import
+            alias="R"
+            type="com.ahmetbabacan.satellites.R" />
+
+        <variable
+            name="viewModel"
+            type="com.ahmetbabacan.satellites.ui.detail.DetailViewModel" />
+
+        <variable
+            name="satellite"
+            type="com.ahmetbabacan.satellites.data.models.Satellite" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#D8D8D8"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/fragmentDetail_toolbar"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:navigationIcon="@drawable/ic_back"
+                app:title="Satellite Detail" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/fragmentDetail_tvOverview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="150dp"
+                android:gravity="center"
+                android:padding="@dimen/textDefaultPadding"
+                android:text="@{satellite.name}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textLargeSize"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Starship-1" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/fragmentDetail_tvDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{viewModel.detailResponse.first_flight}"
+                android:textColor="@color/gray_darkest"
+                android:textSize="@dimen/textSmallSize"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragmentDetail_tvOverview"
+                tools:text="19.03.1903" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/fragmentDetail_tvHeightAndMassLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/textLargeMargin"
+                android:gravity="center"
+                android:text="Height/Mass:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textDefaultSize"
+                android:textStyle="bold"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/fragmentDetail_tvHeightAndMass"
+                app:layout_constraintTop_toBottomOf="@id/fragmentDetail_tvDate" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/fragmentDetail_tvHeightAndMass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/textDefaultMargin"
+                android:gravity="center"
+                android:text='@{viewModel.detailResponse.height + "/" + viewModel.detailResponse.mass}'
+                android:textColor="@color/black"
+                android:textSize="@dimen/textDefaultSize"
+                app:layout_constraintBottom_toBottomOf="@id/fragmentDetail_tvHeightAndMassLabel"
+                app:layout_constraintLeft_toRightOf="@id/fragmentDetail_tvHeightAndMassLabel"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:text="3/5" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/fragmentDetail_tvCostLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/textDefaultMargin"
+                android:gravity="center"
+                android:text="Cost:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textDefaultSize"
+                android:textStyle="bold"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/fragmentDetail_tvCost"
+                app:layout_constraintTop_toBottomOf="@id/fragmentDetail_tvHeightAndMass" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/fragmentDetail_tvCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/textDefaultMargin"
+                android:gravity="center"
+                android:text="@{String.valueOf(viewModel.detailResponse.cost_per_launch)}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textDefaultSize"
+                app:layout_constraintLeft_toRightOf="@id/fragmentDetail_tvCostLabel"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragmentDetail_tvHeightAndMass"
+                tools:text="8.300.000" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/fragmentDetail_tvLastPositionLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/textDefaultMargin"
+                android:gravity="center"
+                android:text="Last Position: "
+                android:textColor="@color/black"
+                android:textSize="@dimen/textDefaultSize"
+                android:textStyle="bold"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/fragmentDetail_tvLastPosition"
+                app:layout_constraintTop_toBottomOf="@id/fragmentDetail_tvCost" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/fragmentDetail_tvLastPosition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/textDefaultMargin"
+                android:gravity="center"
+                android:text='@{"(" + viewModel.currentPosition.posX + "," + viewModel.currentPosition.posY + ")"}'
+                android:textColor="@color/black"
+                android:textSize="@dimen/textDefaultSize"
+                app:layout_constraintLeft_toRightOf="@id/fragmentDetail_tvLastPositionLabel"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragmentDetail_tvCost"
+                tools:text="(23478,23422)" />
+
+
+            <ProgressBar
+                android:id="@+id/fragmentDetail_pbLoading"
+                gone="@{!viewModel.loading}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</layout>
